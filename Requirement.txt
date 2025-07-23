@@ -1,6 +1,7 @@
 streamlit
 pandas
-seaborn
+sqlalchemy
+pymysql
 plotly
 matplotlib
-sqlalchemy
+seaborn
