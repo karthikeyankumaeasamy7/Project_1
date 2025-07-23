@@ -4,6 +4,7 @@ import mysql.connector
 import seaborn as sns
 import plotly.express as px
 import matplotlib.pyplot as plt
+from sqlalchemy import create_engine
 
 # Set page layout
 st.set_page_config(page_title="IMDb Dashboard", layout="wide")
@@ -12,15 +13,14 @@ st.title("🎬 Simple IMDb 2024 Dashboard")
 
 # Connect to MySQL and fetch data
 try:
-    #conn = mysql.connector.connect(
-    #    host="localhost",
-    #    user="root",
-    #    password="root",
-    #    database="imdb_data"
-    #)
-    df = pd.read_csv("imdb_movies_2024.csv")
+    engine = create_engine("mysql+pymysql://root:root@localhost/imdb_data")
+    df = pd.read_sql("SELECT * FROM imdb_movies", con=engine)
     df.columns = df.columns.str.strip().str.lower()
-    st.success("✅ IMDb data loaded successfully")
+    st.success("✅ IMDb data loaded from MySQL database")
+    
+    #df = pd.read_sql("imdb_movies_2024.csv")
+    #df.columns = df.columns.str.strip().str.lower()
+    #st.success("✅ IMDb data loaded successfully")
 except Exception as e:
     st.error(f"❌ Failed to load data: {e}")
     st.stop()
