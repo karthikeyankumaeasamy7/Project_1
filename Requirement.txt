@@ -1,3 +1,7 @@
 streamlit
-mysql-connector-python
 pandas
+sqlalchemy
+pymysql
+plotly
+matplotlib
+seaborn
